@@ -1,10 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Button, Text, View, Alert } from "react-native";
 
 export default function App() {
+  const [count, setCount] = useState(0);
+  const [stateArray, setStateArray] = useState([]);
+
+  const onPressToAdd = () => {
+    setCount(count + 1);
+  };
+  const onPressToSubtract = () => {
+    setCount(count - 1);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>COUNT-ER</Text>
+      <Button title="Press me to Add" onPress={onPressToAdd} />
+      <Text>{count === 0 ? 0 : count}</Text>
+      <Button title="Press me to Subtract" onPress={onPressToSubtract} />
+      <Button
+        title="Press me to Add to Total"
+        onPress={() => {
+          setStateArray(stateArray.concat([count]));
+        }}
+      />
+      {stateArray.map((n) => {
+        return <Text>{n}</Text>;
+      })}
     </View>
   );
 }
@@ -12,8 +34,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
